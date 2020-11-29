@@ -44,6 +44,15 @@ class Previews extends StatelessWidget {
                       shape: BoxShape.circle,
                       border: Border.all(color: content.color , width: 4.0)
                     ),
+                  ),
+                  Positioned(
+                    left: 0,
+                    right: 0,
+                    bottom: 0,
+                    child: SizedBox(
+                      height: 60.0,
+                      child: Image.asset(content.titleImageUrl),
+                    ),
                   )
                 ],
               );
