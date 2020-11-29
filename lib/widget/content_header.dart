@@ -1,6 +1,4 @@
-
 import 'package:flutter/material.dart';
-
 import '../models/content_model.dart';
 
 class ContentHeader extends StatelessWidget {
