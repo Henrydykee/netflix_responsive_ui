@@ -29,14 +29,21 @@ class Previews extends StatelessWidget {
             scrollDirection: Axis.horizontal,
             itemCount: contentList.length,
             itemBuilder: (context , index){
-              final Content conten = contentList[index];
+              final Content content = contentList[index];
               return Stack(
                 children: [
                   Container(
                     margin: EdgeInsets.symmetric(horizontal: 16.0),
                     height: 130.0,
                     width: 130.0,
-                    color: Colors.purple,
+                    decoration: BoxDecoration(
+                      image: DecorationImage(
+                        image: AssetImage(content.imageUrl),
+                        fit: BoxFit.cover
+                      ),
+                      shape: BoxShape.circle,
+                      border: Border.all(color: content.color , width: 4.0)
+                    ),
                   )
                 ],
               );
