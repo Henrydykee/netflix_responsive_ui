@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_netflix_responsive_ui/cubit/app_bar_cubit.dart';
 import 'package:flutter_netflix_responsive_ui/screen/nav_screen.dart';
 import 'package:flutter_netflix_responsive_ui/widget/content_header.dart';
 import 'package:flutter_netflix_responsive_ui/widget/content_list.dart';
 import 'package:flutter_netflix_responsive_ui/widget/custom_app_bar.dart';
 import 'package:flutter_netflix_responsive_ui/widget/previews.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../data/data.dart';
 
@@ -19,9 +21,10 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   void initState() {
     _scrollController = ScrollController()..addListener(() {
-      setState(() {
-        scrollOffset = _scrollController.offset;
-      });
+      // setState(() {
+      //   scrollOffset = _scrollController.offset;
+      // });
+      context.bloc<AppBarCubit>().setOffset(_scrollController.offset);
     });
     super.initState();
   }
@@ -34,7 +37,7 @@ class _HomeScreenState extends State<HomeScreen> {
   }
 
   ScrollController _scrollController;
-  double scrollOffset = 0.0;
+  //double scrollOffset = 0.0;
 
   @override
   Widget build(BuildContext context) {
@@ -50,7 +53,12 @@ class _HomeScreenState extends State<HomeScreen> {
       ),
       appBar: PreferredSize(
         preferredSize: Size(screenSize.width, 50.0),
-        child: CustomAppBar(scrollOffset: scrollOffset,),
+        // ignore: missing_required_param
+        child: BlocBuilder<AppBarCubit,  double>(
+          builder: (context, scrollOffset){
+            return CustomAppBar(scrollOffset: scrollOffset );
+          },
+      )
       ),
       body: CustomScrollView(
         controller:  _scrollController,
